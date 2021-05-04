@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     color: " #5DC560",
     fontFamily: "Merriweather Sans, sans-serif",
     fontSize: "21px",
+    whiteSpace: "pre",
   },
   h: {
     marginTop: "10px",
@@ -148,7 +149,8 @@ const Wrapper = ({
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <h2 className={classes.h2}>
-            Ostatnia akutalizacja: <a className={classes.a}>{updatedAt}</a>
+            Ostatnia akutalizacja:{" "}
+            <a className={classes.a}>{loading ? "ładowanie..." : updatedAt}</a>
           </h2>
         </Grid>
       </div>

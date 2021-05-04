@@ -29,24 +29,39 @@ export default function StickyFooter() {
     <footer className={classes.footer}>
       <Container>
         <Grid container justify='center' direction='row'>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
-            <Typography variant='body1'>
-              <a className={classes.title}>O nas:</a>
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
             <Typography variant='body1'>
               <a className={classes.title}>Nasze sklepy:</a>
+              <ul>
+                <li className={classes.listItem}>
+                  <Link
+                    color='inherit'
+                    underline='none'
+                    href='https://www.fotosoft.pl/'
+                  >
+                    fotosoft.pl
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link
+                    color='inherit'
+                    underline='none'
+                    href='https://kupsiup.pl/'
+                  >
+                    kupsiup.pl
+                  </Link>
+                </li>
+              </ul>
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
             <Typography variant='body1'>
               <a className={classes.title}>Kontakt:</a>
               <ul>
-                <li className={classes.listItem}>Telefon</li>
-                <li className={classes.listItem}>Email</li>
-                <li className={classes.listItem}>Skype</li>
-                <li className={classes.listItem}>GG</li>
+                <li className={classes.listItem}>506 427 234</li>
+                <li className={classes.listItem}>MF@FOTOSOFT.PL</li>
+                <li className={classes.listItem}>Skype:fylyp2000</li>
+                <li className={classes.listItem}>GG:13340183</li>
               </ul>
             </Typography>
           </Grid>

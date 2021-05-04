@@ -102,7 +102,7 @@ const CustomizedTables = ({
   }
 
   return loading ? (
-    <CircularProgress color='green' />
+    <CircularProgress />
   ) : (
     getUniqueCategories().map((category) => (
       <TableContainer component={Paper} elevation={0} key={category}>

@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
     case GET_DATE:
       return {
         ...state,
-        updatedAt: payload,
+        updatedAt: payload.replace(",", "\t"),
       };
     default:
       return state;

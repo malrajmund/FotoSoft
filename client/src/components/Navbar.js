@@ -15,6 +15,9 @@ import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
+    [theme.breakpoints.down("sm")]: {
+      height: "70px",
+    },
     background: "white",
     boxShadow: "none",
     height: "120px",
@@ -25,15 +28,23 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "3px solid darkgreen",
   },
   logo: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
     maxWidth: "180px",
     maxHeight: "120px",
+    textAlign: "center",
+    display: "block",
   },
   items: {
     fontSize: "16px",
   },
   item: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "16px",
+    },
     [theme.breakpoints.down("sm")]: {
-      display: "none",
+      fontSize: "20px",
     },
     "&:hover": {
       color: "darkgreen",
@@ -41,8 +52,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   materialIcons: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
     display: "inline-flex",
     verticalAlign: "middle",
+    marginRight: "10px",
   },
   logout: {
     border: "3px solid darkgreen",
@@ -52,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "darkgreen",
       cursor: "pointer",
     },
+  },
+  container: {
+    [theme.breakpoints.down("sm")]: {
+      direction: "column",
+    },
+    direfction: "row",
   },
 }));
 
@@ -63,105 +84,103 @@ const Navbar = (props) => {
   };
   return (
     <AppBar className={classes.navbar} position='static'>
-      <Grid container alignItems='center' direction='row' wrap='nowrap'>
-        <Grid item xs={3} sm={3} md={3} lg={3} xl={3} justify='flex-start'>
-          <a href='/'>
-            <img src={logo} className={classes.logo}></img>
-          </a>
+      <Grid
+        container
+        alignItems='center'
+        wrap='nowrap'
+        className={classes.container}
+      >
+        <Grid
+          item
+          direction='row'
+          container
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          xl={3}
+          justify='center'
+          className={classes.item}
+        >
+          <Grid item>
+            <PhoneIcon className={classes.materialIcons}></PhoneIcon>
+          </Grid>
+          <Grid item>506 427 234</Grid>
         </Grid>
         <Grid
           item
-          xs={6}
-          sm={6}
-          md={6}
-          lg={6}
-          xl={6}
-          container
-          alignItems='center'
           direction='row'
+          container
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          xl={3}
+          justify='center'
+          className={classes.item}
+          spacing={0}
         >
-          <Grid
-            item
-            direction='row'
-            container
-            xs={3}
-            sm={3}
-            md={3}
-            lg={3}
-            xl={3}
-            justify='center'
-            className={classes.item}
-          >
-            <Grid item>
-              <PhoneIcon className={classes.materialIcons}></PhoneIcon>
-            </Grid>
-            <Grid item>506 427 234</Grid>
+          <Grid item>
+            <MailIcon className={classes.materialIcons}></MailIcon>
           </Grid>
-          <Grid
-            item
-            direction='row'
-            container
-            xs={3}
-            sm={3}
-            md={3}
-            lg={3}
-            xl={3}
-            justify='flex-start'
-            className={classes.item}
-            spacing={1}
-          >
-            <Grid item>
-              <MailIcon className={classes.materialIcons}></MailIcon>
-            </Grid>
-            <Grid item>mf@fotosoft.pl</Grid>
+          <Grid item>mf@fotosoft.pl</Grid>
+        </Grid>
+        <Grid
+          item
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          xl={2}
+          justify='center'
+          className={classes.logo}
+        >
+          <img src={logo} className={classes.logo}></img>
+        </Grid>
+        <Grid
+          item
+          direction='row'
+          container
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          xl={3}
+          justify='center'
+          className={classes.item}
+          spacing={0}
+        >
+          <Grid item>
+            <SendIcon className={classes.materialIcons} />
           </Grid>
-          <Grid
-            item
-            direction='row'
-            container
-            xs={3}
-            sm={3}
-            md={3}
-            lg={3}
-            xl={3}
-            justify='center'
-            className={classes.item}
-            spacing={1}
-          >
-            <Grid item>
-              <SendIcon className={classes.materialIcons} />
-            </Grid>
-            <Grid item>Skype: fylyp2000 </Grid>
-          </Grid>
+          <Grid item>Skype: fylyp2000 </Grid>
+        </Grid>
 
-          <Grid
-            item
-            direction='row'
-            container
-            xs={3}
-            sm={3}
-            md={3}
-            lg={3}
-            xl={3}
-            justify='center'
-            className={classes.item}
-            spacing={1}
-          >
-            <Grid item>
-              <Brightness5Icon className={classes.materialIcons} />
-            </Grid>
-            <Grid item>GG: 13340183 </Grid>
+        <Grid
+          item
+          direction='row'
+          container
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          xl={3}
+          justify='center'
+          className={classes.item}
+          spacing={0}
+        >
+          <Grid item>
+            <Brightness5Icon className={classes.materialIcons} />
           </Grid>
+          <Grid item>GG: 13340183 </Grid>
         </Grid>
-        <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
-          {props.isAuthenticated ? (
-            <Grid item xl={6}>
-              <buttom className={classes.logout} onClick={(e) => onClick(e)}>
-                Wyloguj{" "}
-              </buttom>
-            </Grid>
-          ) : null}
-        </Grid>
+        {props.isAuthenticated ? (
+          <Grid item>
+            <buttom className={classes.logout} onClick={(e) => onClick(e)}>
+              Wyloguj{" "}
+            </buttom>
+          </Grid>
+        ) : null}
       </Grid>
     </AppBar>
   );

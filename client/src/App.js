@@ -61,16 +61,7 @@ const App = () => {
               <Route exact path='/' component={Wrapper}></Route>
             </Grid>
 
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              xl={12}
-              flexShrink={0}
-              style={{ height: "50px" }}
-            >
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <StickyFooter></StickyFooter>
             </Grid>
           </Grid>
