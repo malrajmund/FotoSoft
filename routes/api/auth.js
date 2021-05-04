@@ -25,29 +25,25 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(500).json({ errors: errors.array() });
     }
 
-    const { password } = req.body;
+    const { login, password } = req.body;
 
     try {
-      let admin = await Admin.findOne({ name: "Admin" });
+      let admin = await Admin.findOne({ name: login });
       if (!admin) {
         return res.status(400).json({ errors: [{ msg: "Złe dane!" }] });
       }
-
       const isMatch = () => (password === admin.password ? true : false);
-
       if (!isMatch()) {
         return res.status(400).json({ errors: [{ msg: "Złe hasło!" }] });
       }
-
       const payload = {
         user: {
           id: admin.id,
         },
       };
-
       jwt.sign(
         payload,
         config.get("jwtSecret"),
