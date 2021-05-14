@@ -12,6 +12,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { getDate } from "../actions/items";
 import PropTypes from "prop-types";
+import ScreenRotationIcon from "@material-ui/icons/ScreenRotation";
+import backgroundImage from "../img/background.jpg";
 
 const fx = require("money");
 
@@ -22,12 +24,27 @@ fx.rates = {
 };
 
 const useStyles = makeStyles((theme) => ({
+  "@keyframes colorChange": {
+    "0%": {
+      color: "black",
+    },
+    "50%": {
+      color: "red",
+    },
+    "100%": {
+      color: "black",
+    },
+  },
   root: {
     textAlign: "center",
     alignItems: "center",
     backgroundColor: "#3B4557",
-    /*backgroundImage:
-      "url(https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?cs=srgb&dl=pexels-pixabay-220182.jpg&fm=jpg)",*/
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundBlendMode: "multiply",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "top",
+    paddingBottom: "20px",
   },
   h1: {
     color: "#FEFEFE",
@@ -60,6 +77,20 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: "20px",
+  },
+  rotate: {
+    /* for all screens */ display: "none",
+    marginBottom: "20px",
+    fontSize: "20px",
+    color: "#eb7971",
+    animationName: "$colorChange",
+    animationIterationCount: "infinite",
+    animationDuration: "3s",
+    animationFillMode: "forwards",
+    /* only when orientation is in portrait mode */
+    "@media (orientation: portrait)": {
+      display: "block",
+    },
   },
 }));
 
@@ -154,14 +185,15 @@ const Wrapper = ({
           </h2>
         </Grid>
       </div>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={6}>
         <Typography
           component='div'
           style={{
+            margin: "auto",
             backgroundColor: "white",
             minheight: "100vh",
             width: "100%",
-            opacity: 0.96,
+            opacity: 0.93,
             marginTop: "10px",
             marginBottom: "20px",
             borderRadius: "20px",
@@ -171,13 +203,22 @@ const Wrapper = ({
             paddingTop: "20px",
           }}
         >
+          {" "}
+          <Grid container direction='row' justify='center'>
+            <div className={classes.rotate}>
+              <Grid item>
+                <ScreenRotationIcon></ScreenRotationIcon>
+              </Grid>{" "}
+              <Grid item>Obróć ekran dla lepszej widoczności oferty.</Grid>
+            </div>
+          </Grid>
           <Grid
             container
             justify='center'
             alignItems='center'
             direction='column'
           >
-            <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
+            <Grid item xs={11} sm={11} md={11} lg={10} xl={10}>
               <Table />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

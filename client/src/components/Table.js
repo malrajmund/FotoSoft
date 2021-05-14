@@ -13,7 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { TableFooter } from "@material-ui/core";
 
 import { connect } from "react-redux";
-import { getAllItems } from "../actions/items";
+import { getAllItems, getCurrency } from "../actions/items";
 import PropTypes from "prop-types";
 const { convert } = require("exchange-rates-api");
 
@@ -39,14 +39,30 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const useStyles = makeStyles({
+  "@keyframes colorChange": {
+    "0%": {
+      backgroundColor: "white",
+    },
+    "50%": {
+      backgroundColor: "#eb7971",
+    },
+    "100%": {
+      backgroundColor: "white",
+    },
+  },
   table: {
     marginTop: "20px",
     marginBottom: "20px",
     maxWidth: "100%",
     borderRadius: "10px",
+    overflowX: "auto",
   },
   discount: {
     backgroundColor: "#eb7971",
+    animationName: "$colorChange",
+    animationIterationCount: "infinite",
+    animationDuration: "3s",
+    animationFillMode: "forwards",
   },
   category: {
     backgroundColor: "white",
@@ -76,36 +92,46 @@ const unique = (value, index, self) => {
 
 const CustomizedTables = ({
   getAllItems,
-  items: { items, loading },
+  getCurrency,
+  items: { items, loading, euroPrice },
   isAuthenticated,
 }) => {
   const classes = useStyles();
   useEffect(() => {
     getAllItems();
   }, [getAllItems]);
+  useEffect(() => {
+    getCurrency();
+  }, [getCurrency]);
 
-  function getCategories(items) {
+  const getCategories = (data) => {
     var array = new Array();
-    items.map((item) => {
+    data.map((item) => {
       array.push(item.category);
     });
     return array;
-  }
+  };
 
-  function onlyUnique(value, index, self) {
+  const onlyUnique = (value, index, self) => {
     return self.indexOf(value) === index;
-  }
+  };
 
-  function getUniqueCategories() {
+  const getUniqueCategories = (data) => {
     var array = [];
-    return loading ? null : (array = getCategories(items).filter(onlyUnique));
-  }
+
+    return loading ? null : (array = getCategories(data).filter(onlyUnique));
+  };
 
   return loading ? (
     <CircularProgress />
   ) : (
-    getUniqueCategories().map((category) => (
-      <TableContainer component={Paper} elevation={0} key={category}>
+    getUniqueCategories(items).map((category) => (
+      <TableContainer
+        component={Paper}
+        elevation={0}
+        key={category}
+        style={{ overflowX: "auto" }}
+      >
         <a className={classes.category}>{category}</a>
         <Table className={classes.table} aria-label='customized table'>
           <TableHead>
@@ -117,9 +143,9 @@ const CustomizedTables = ({
               <StyledTableCell align='right'>
                 Cena PLN brutto/szt
               </StyledTableCell>
-              <StyledTableCell align='right'>
+              {/*<StyledTableCell align='right'>
                 Cena EURO brutto/szt
-              </StyledTableCell>
+              </StyledTableCell>*/}
               <StyledTableCell align='right'>
                 Dostępność (ilość)
               </StyledTableCell>
@@ -198,7 +224,7 @@ const CustomizedTables = ({
                   >
                     {item.price + " zł"}
                   </StyledTableCell>
-                  <StyledTableCell
+                  {/* <StyledTableCell
                     align='right'
                     className={
                       item.isDiscount
@@ -209,12 +235,13 @@ const CustomizedTables = ({
                     }
                   >
                     {
-                      /*fx(item.price).from("PLN").to("EUR").toFixed(2)*/ fx.convert(
+                      /*fx(item.price).from("PLN").to("EUR").toFixed(2) fx.convert(
                         item.price,
                         { from: "PLN", to: "EUR" }
                       ) + " €"
+                      (item.price * (1 / euroPrice)).toFixed(2) + " €"
                     }
-                  </StyledTableCell>
+                  </StyledTableCell>*/}
                   <StyledTableCell
                     align='right'
                     className={
@@ -288,10 +315,10 @@ const CustomizedTables = ({
                   borderBottom: "none",
                 }}
               ></StyledTableCell>
-              <StyledTableCell
+              {/*<StyledTableCell
                 align='right'
                 style={{ borderBottom: "none" }}
-              ></StyledTableCell>
+              ></StyledTableCell>*/}
               <StyledTableCell
                 align='right'
                 style={{ borderBottom: "none" }}
@@ -341,6 +368,7 @@ const CustomizedTables = ({
 
 CustomizedTables.propTypes = {
   getAllItems: PropTypes.func.isRequired,
+  getCurrency: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
 };
@@ -350,4 +378,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getAllItems })(CustomizedTables);
+export default connect(mapStateToProps, { getAllItems, getCurrency })(
+  CustomizedTables
+);

@@ -12,3 +12,4 @@ export const ADD_ITEM = "ADD_ITEM";
 export const GET_ITEM = "GET_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
 export const GET_DATE = "GET_DATE";
+export const GET_CURRENCY = "GET_CURRENCY";

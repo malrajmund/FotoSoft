@@ -33,7 +33,7 @@ const App = () => {
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Navbar />
           </Grid>
-          <Grid container justify='center' direction='column'>
+          <Grid container justify='center' direction='row'>
             <Grid
               item
               xs={12}
@@ -42,7 +42,7 @@ const App = () => {
               lg={12}
               xl={12}
               style={{
-                minHeight: "calc(100vh - 192px)",
+                minHeight: "100%", //"calc(100vh - 100px)",
                 backgroundColor: "#3B4557",
               }}
             >

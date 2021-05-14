@@ -62,7 +62,11 @@ const Login = (props) => {
       <Container
         component='main'
         maxWidth='xs'
-        style={{ backgroundColor: "white", borderRadius: "20px" }}
+        style={{
+          backgroundColor: "white",
+          borderRadius: "20px",
+          marginBottom: "210px",
+        }}
       >
         <CssBaseline />
         <div className={classes.paper}>

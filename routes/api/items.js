@@ -96,12 +96,11 @@ router.delete("/:id", auth, async (req, res) => {
       return res.status(404).json({ msg: "Nie znaleziono oferty" });
     }
     await item.remove();
-    res.json({ msg: "Pozycja usunięta!" });
+    const items = await Item.find({});
+    res.json(items);
+    //res.json({ msg: "Pozycja usunięta!" });
   } catch (error) {
     console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Nie znaleziono oferty" });
-    }
     res.status(500).send("Server Error");
   }
 });
@@ -126,6 +125,7 @@ router.put(
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
+
       var item = await Item.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         category: req.body.category.toLowerCase(),
@@ -142,7 +142,8 @@ router.put(
           new Date().toLocaleTimeString("pl"),
       });
       item.save();
-      res.json(item);
+      const items = await Item.find({});
+      res.json(items);
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Server Error");

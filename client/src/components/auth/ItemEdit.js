@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getItem, updateItem, deleteItem } from "../../actions/items";
+import {
+  getItem,
+  updateItem,
+  deleteItem,
+  getAllItems,
+} from "../../actions/items";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -27,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     padding: "40px",
     borderRadius: "20px",
+    marginBottom: "20px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -43,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemEdit = ({
   getItem,
+  getAllItems,
   updateItem,
   deleteItem,
   items: { items, loading },
@@ -93,8 +100,6 @@ const ItemEdit = ({
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleCheckboxChange = (e) => setFormData(e.target.value);
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -119,8 +124,7 @@ const ItemEdit = ({
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            updateItem(match.params.id, formData);
-            <Redirect push to='/' />;
+            updateItem(match.params.id, formData, history);
           }}
         >
           <Grid container spacing={2}>
@@ -273,10 +277,7 @@ const ItemEdit = ({
                 color='secondary'
                 className={classes.submit}
                 size='large'
-                onClick={
-                  handleClickOpen
-                  //deleteItem(match.params.id);
-                }
+                onClick={handleClickOpen}
               >
                 Usuń
               </Button>
@@ -301,8 +302,8 @@ const ItemEdit = ({
                   </Button>
                   <Button
                     onClick={(e) => {
-                      deleteItem(match.params.id);
                       handleClose();
+                      deleteItem(match.params.id, history);
                     }}
                     color='primary'
                     autoFocus
@@ -323,12 +324,16 @@ ItemEdit.propTypes = {
   getItem: PropTypes.func.isRequired,
   updateItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  getAllItems: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   items: state.items,
 });
 
-export default connect(mapStateToProps, { getItem, updateItem, deleteItem })(
-  ItemEdit
-);
+export default connect(mapStateToProps, {
+  getItem,
+  updateItem,
+  deleteItem,
+  getAllItems,
+})(ItemEdit);

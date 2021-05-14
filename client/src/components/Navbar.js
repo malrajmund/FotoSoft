@@ -15,8 +15,8 @@ import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    [theme.breakpoints.down("sm")]: {
-      height: "70px",
+    [theme.breakpoints.down("md")]: {
+      height: "60px",
     },
     background: "white",
     boxShadow: "none",
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "3px solid darkgreen",
   },
   logo: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       display: "none",
     },
     maxWidth: "180px",
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "16px",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       fontSize: "20px",
     },
     "&:hover": {
@@ -52,26 +52,33 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   materialIcons: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
     display: "inline-flex",
     verticalAlign: "middle",
     marginRight: "10px",
   },
   logout: {
     border: "3px solid darkgreen",
-    borderRadius: "20px",
+
     padding: "5px",
     "&:hover": {
       backgroundColor: "darkgreen",
       cursor: "pointer",
+      color: "white",
     },
+    position: "absolute",
+    zIndex: "100",
+    backgroundColor: "#5DC560",
+    borderBottomRightRadius: "20px",
+    borderBottomLeftRadius: "20px",
+    borderTop: "none",
+    marginTop: "4px",
   },
   container: {
     [theme.breakpoints.down("sm")]: {
       direction: "column",
+      flexWrap: "wrap",
     },
+    //flexWrap: "nowrap",
     direfction: "row",
   },
 }));
@@ -87,18 +94,19 @@ const Navbar = (props) => {
       <Grid
         container
         alignItems='center'
-        wrap='nowrap'
         className={classes.container}
+        direction='row'
+        justify='center'
       >
         <Grid
           item
           direction='row'
           container
-          xs={3}
-          sm={3}
-          md={3}
-          lg={3}
-          xl={3}
+          xs={6}
+          sm={6}
+          md={6}
+          lg={2}
+          xl={2}
           justify='center'
           className={classes.item}
         >
@@ -111,11 +119,11 @@ const Navbar = (props) => {
           item
           direction='row'
           container
-          xs={3}
-          sm={3}
-          md={3}
-          lg={3}
-          xl={3}
+          xs={6}
+          sm={6}
+          md={6}
+          lg={2}
+          xl={2}
           justify='center'
           className={classes.item}
           spacing={0}
@@ -130,22 +138,24 @@ const Navbar = (props) => {
           xs={3}
           sm={3}
           md={3}
-          lg={3}
+          lg={2}
           xl={2}
           justify='center'
           className={classes.logo}
         >
-          <img src={logo} className={classes.logo}></img>
+          <a href='/'>
+            <img src={logo} className={classes.logo}></img>
+          </a>
         </Grid>
         <Grid
           item
           direction='row'
           container
-          xs={3}
-          sm={3}
-          md={3}
-          lg={3}
-          xl={3}
+          xs={6}
+          sm={6}
+          md={6}
+          lg={2}
+          xl={2}
           justify='center'
           className={classes.item}
           spacing={0}
@@ -160,11 +170,11 @@ const Navbar = (props) => {
           item
           direction='row'
           container
-          xs={3}
-          sm={3}
-          md={3}
-          lg={3}
-          xl={3}
+          xs={6}
+          sm={6}
+          md={6}
+          lg={2}
+          xl={2}
           justify='center'
           className={classes.item}
           spacing={0}
@@ -175,7 +185,19 @@ const Navbar = (props) => {
           <Grid item>GG: 13340183 </Grid>
         </Grid>
         {props.isAuthenticated ? (
-          <Grid item>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            lg={6}
+            xl={6}
+            justify='flex-end'
+            className={classes.item}
+            spacing={0}
+            direction='row'
+            container
+          >
             <buttom className={classes.logout} onClick={(e) => onClick(e)}>
               Wyloguj{" "}
             </buttom>

@@ -8,6 +8,7 @@ import {
   GET_ITEM,
   UPDATE_ITEM,
   GET_DATE,
+  GET_CURRENCY,
 } from "./types";
 
 export const getAllItems = () => async (dispatch) => {
@@ -22,16 +23,16 @@ export const getAllItems = () => async (dispatch) => {
   }
 };
 
-export const deleteItem = (id) => async (dispatch) => {
+export const deleteItem = (id, history) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/items/${id}`);
-    console.log("test1");
+
     dispatch({
       type: DELETE_ITEM,
-      payload: id,
+      payload: res.data,
     });
-    console.log("test2");
-    dispatch(setAlert("Pomyślnie usunięto pozycję.", "success"));
+    history.push("/");
+    dispatch(setAlert("Pomyślnie usunięto pozycję.", "info"));
   } catch (error) {
     console.log(error.msg);
   }
@@ -67,7 +68,7 @@ export const getItem = (id) => async (dispatch) => {
   }
 };
 
-export const updateItem = (id, formData) => async (dispatch) => {
+export const updateItem = (id, formData, history) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -79,7 +80,8 @@ export const updateItem = (id, formData) => async (dispatch) => {
       type: UPDATE_ITEM,
       payload: res.data,
     });
-    dispatch(setAlert("Zedytowano pozycję.", "success"));
+    dispatch(setAlert("Zedytowano pozycję: " + formData.name, "info"));
+    history.push("/");
   } catch (error) {
     console.log(error.msg);
   }
@@ -94,5 +96,21 @@ export const getDate = () => async (dispatch) => {
     });
   } catch (error) {
     console.log(error.msg);
+  }
+};
+
+export const getCurrency = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      "http://api.nbp.pl/api/exchangerates/rates/a/eur"
+    );
+    console.log(res);
+
+    dispatch({
+      type: GET_CURRENCY,
+      payload: res.data.rates[0].mid,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
