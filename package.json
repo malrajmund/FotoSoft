@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "FotoSoft hurt showcase",
   "main": "server.js",
+  "engines": {
+    "node": "12.18.2"
+  },
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
