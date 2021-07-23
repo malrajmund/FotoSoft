@@ -11,9 +11,13 @@ const ItemSchema = new mongoose.Schema({
   },
   EAN: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
+    type: Number,
+    required: true,
+  },
+  priceEUR: {
     type: Number,
     required: true,
   },
@@ -36,6 +40,10 @@ const ItemSchema = new mongoose.Schema({
   isDiscount: {
     type: Boolean,
     default: false,
+  },
+  index: {
+    type: Number,
+    required: true,
   },
   date: {
     type: Date,
