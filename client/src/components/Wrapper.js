@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { getDate } from "../actions/items";
 import PropTypes from "prop-types";
 import ScreenRotationIcon from "@material-ui/icons/ScreenRotation";
-import backgroundImage from "../img/background2.jpg";
+import backgroundImage from "../img/background4.jpg";
 
 const fx = require("money");
 
@@ -45,35 +45,49 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundPosition: "top",
     paddingBottom: "20px",
+    paddingTop: "120px",
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "60px",
+    },
   },
   h1: {
     color: "#FEFEFE",
-    fontFamily: "Merriweather Sans, sans-serif",
-    backgroundColor: "#3B4557",
+    //fontFamily: "Merriweather Sans, sans-serif",
+    fontWeight: "100",
+    fontSize: "50px",
+    //backgroundColor: "#3B4557",
     borderRadius: "20px",
     display: "inline-block",
-    margin: "5px",
+    margin: "2px",
+    marginBottom: "-10px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "40px",
+    },
   },
   h2: {
     color: "#909CB1",
-    fontFamily: "Merriweather Sans, sans-serif",
-    backgroundColor: "#3B4557",
+    fontWeight: "100",
+    //backgroundColor: "#3B4557",
     borderRadius: "20px",
     display: "inline-block",
     margin: "5px",
+    fontSize: "30px",
   },
   a: {
     color: " #5DC560",
-    fontFamily: "Merriweather Sans, sans-serif",
-    fontSize: "21px",
+    fontWeight: "100",
+    fontSize: "30px",
     whiteSpace: "pre",
   },
   h: {
-    marginTop: "10px",
-    backgroundColor: "#3B4557",
-    borderRadius: "20px",
+    marginTop: "30px",
+    marginBottom: "-30px",
+    padding: "0px 20px 0px 20px",
+    minWidth: "25%",
+    //backgroundColor: "#3B4557",
+    borderRadius: "5px",
     display: "inline-block",
-    opacity: 0.9,
+    opacity: 0.95,
   },
   button: {
     margin: "20px",
@@ -90,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
     /* only when orientation is in portrait mode */
     "@media (orientation: portrait)": {
       display: "block",
+      marginTop: "40px",
     },
   },
   typo: {
@@ -203,95 +218,72 @@ const Wrapper = ({
     >
       <div className={classes.h}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <h1 className={classes.h1}>Cennik sprzedaży hurtowej</h1>
+          <h1 className={classes.h1}>Wholesale price list</h1>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <h2 className={classes.h2}>
-            Ostatnia aktualizacja:{" "}
-            <a className={classes.a}>{loading ? "ładowanie..." : updatedAt}</a>
+            Last update:{" "}
+            <a className={classes.a}>{loading ? "loading..." : updatedAt}</a>
           </h2>
         </Grid>
       </div>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-        <Typography
-          component='div'
-          className={classes.typo}
-          style={{
-            margin: "auto",
-            backgroundColor: "white",
-            minheight: "100vh",
-            opacity: 0.93,
-            marginTop: "10px",
-            marginBottom: "20px",
-            borderRadius: "20px",
-            textAlign: "center",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: "20px",
-          }}
-        >
-          {" "}
-          <Grid container direction='row' justify='center'>
-            <div className={classes.rotate}>
-              <Grid item>
-                <ScreenRotationIcon></ScreenRotationIcon>
-              </Grid>{" "}
-              <Grid item>Obróć ekran dla lepszej widoczności oferty.</Grid>
-            </div>
+        {" "}
+        <Grid container direction='row' justify='center'>
+          <div className={classes.rotate}>
+            <Grid item>
+              <ScreenRotationIcon></ScreenRotationIcon>
+            </Grid>{" "}
+            <Grid item>Rotate your screen for better visibility.</Grid>
+          </div>
+        </Grid>
+        <Grid container justify='center' alignItems='center' direction='column'>
+          <Grid item xs={11} sm={11} md={11} lg={12} xl={12}>
+            <Table />
           </Grid>
-          <Grid
-            container
-            justify='center'
-            alignItems='center'
-            direction='column'
-          >
-            <Grid item xs={11} sm={11} md={11} lg={12} xl={12}>
-              <Table />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              {isAuthenticated ? (
-                <>
-                  <Button
-                    variant='contained'
-                    color='default'
-                    size='large'
-                    className={classes.button}
-                    startIcon={<AddIcon />}
-                    href='addItem'
-                  >
-                    Dodaj pozycje
-                  </Button>
-                  <Button
-                    variant='contained'
-                    color='default'
-                    size='large'
-                    className={classes.button}
-                    startIcon={<GetAppIcon />}
-                    onClick={(e) => {
-                      download("HurtPLN.txt", getString(items, "PLN"));
-                    }}
-                  >
-                    Pobierz w PLN
-                  </Button>
-                  <Button
-                    variant='contained'
-                    color='default'
-                    size='large'
-                    className={classes.button}
-                    startIcon={<GetAppIcon />}
-                    onClick={(e) => {
-                      download("HurtEUR.txt", getString(items, "EUR"));
-                    }}
-                  >
-                    Pobierz w €
-                  </Button>
-                </>
-              ) : (
-                <></>
-              )}
-            </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            {isAuthenticated ? (
+              <>
+                <Button
+                  variant='contained'
+                  color='default'
+                  size='large'
+                  className={classes.button}
+                  startIcon={<AddIcon />}
+                  href='addItem'
+                >
+                  Dodaj pozycje
+                </Button>
+                <Button
+                  variant='contained'
+                  color='default'
+                  size='large'
+                  className={classes.button}
+                  startIcon={<GetAppIcon />}
+                  onClick={(e) => {
+                    download("HurtPLN.txt", getString(items, "PLN"));
+                  }}
+                >
+                  Pobierz w PLN
+                </Button>
+                <Button
+                  variant='contained'
+                  color='default'
+                  size='large'
+                  className={classes.button}
+                  startIcon={<GetAppIcon />}
+                  onClick={(e) => {
+                    download("HurtEUR.txt", getString(items, "EUR"));
+                  }}
+                >
+                  Pobierz w €
+                </Button>
+              </>
+            ) : (
+              <></>
+            )}
           </Grid>
-        </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -25,6 +25,9 @@ router.post(
     }
     try {
       const lastItem = await Item.findOne({}).sort({ index: -1 }).limit(1);
+      var date = new Date();
+      date.setHours(date.getHours() + 2);
+      var updated = date.toISOString().substr(0, 19).replace("T", ",");
 
       if (!lastItem) {
         const newItem = new Item({
@@ -39,10 +42,7 @@ router.post(
           isActive: req.body.isActive,
           isDiscount: req.body.isDiscount,
           index: 0,
-          updatedAt: new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-            .toISOString()
-            .substr(0, 19)
-            .replace("T", ","),
+          updatedAt: updated,
         });
         const item = await newItem.save();
         res.json(item);
@@ -59,17 +59,14 @@ router.post(
           isActive: req.body.isActive,
           isDiscount: req.body.isDiscount,
           index: lastItem.index + 1,
-          updatedAt: new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-            .toISOString()
-            .substr(0, 19)
-            .replace("T", ","),
+          updatedAt: updated,
         });
         const item = await newItem.save();
         res.json(item);
       }
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server error");
+      res.status(500).send("AAAAAAAAABBBBBB");
     }
   }
 );

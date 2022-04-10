@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   alert: {
     marginLeft: "25%",
     marginRight: "auto",
+    marginTop: "200px",
     fontSize: "20px",
     position: "absolute",
     zIndex: "1000",

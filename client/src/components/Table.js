@@ -35,12 +35,13 @@ fx.rates = {
 //CSS
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#ECF0F6",
-    color: "#97A2B2",
+    backgroundColor: "#3B4557", //"#5DC560", //"#ECF0F6",
+    color: "white", //"#97A2B2",
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: "16px",
+    //backgroundColor: "white",
   },
 }))(TableCell);
 
@@ -61,13 +62,25 @@ const useStyles = makeStyles((theme) => ({
     color: "#5DC560",
   },
   container: {
+    marginTop: "50px",
+    padding: "5px",
+    backgroundColor: "#EDEDED",
+    boxShadow:
+      "rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;",
     [theme.breakpoints.up("lg")]: {
-      width: "1000px",
+      //width: "1000px",
+      padding: "20px 40px 20px 40px",
     },
   },
   authenticatedContainer: {
+    marginTop: "50px",
+    padding: "5px",
+    backgroundColor: "#EDEDED",
+    boxShadow:
+      "rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;",
     [theme.breakpoints.up("lg")]: {
-      width: "1100px",
+      //width: "1100px",
+      padding: "20px 40px 20px 40px",
     },
   },
   table: {
@@ -76,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     borderRadius: "10px",
     overflowX: "auto",
+    boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
   },
   discount: {
     backgroundColor: "#eb7971",
@@ -85,10 +99,12 @@ const useStyles = makeStyles((theme) => ({
     animationFillMode: "forwards",
   },
   category: {
-    backgroundColor: "white",
+    //backgroundColor: "white",
     textAlign: "center",
-    fontSize: "25px",
-    paddingTop: "30px",
+    fontSize: "45px",
+    paddingTop: "20px",
+    marginTop: "100px",
+    borderBottom: "2px solid darkgreen",
   },
   unactive: {
     display: "none",
@@ -232,45 +248,45 @@ const CustomizedTables = ({
                   <>
                     <StyledTableCell
                       align='right'
-                      style={{ borderTopLeftRadius: "20px" }}
+                      style={{ borderTopLeftRadius: "5px" }}
                     ></StyledTableCell>
                     <StyledTableCell></StyledTableCell>
                     <StyledTableCell className={classes.name}>
-                      Nazwa
+                      NAME
                     </StyledTableCell>
                   </>
                 ) : (
                   <StyledTableCell
                     className={classes.name}
-                    style={{ borderTopLeftRadius: "20px" }}
+                    style={{ borderTopLeftRadius: "5px" }}
                   >
-                    Nazwa
+                    NAME
                   </StyledTableCell>
                 )}
 
                 <StyledTableCell align='right'>EAN</StyledTableCell>
-                <StyledTableCell align='right'>Cena PLN/szt</StyledTableCell>
+                <StyledTableCell align='right'>PRICE €/pcs</StyledTableCell>
 
-                <StyledTableCell align='right'>Ilość</StyledTableCell>
+                <StyledTableCell align='right'>QNTY</StyledTableCell>
                 <StyledTableCell align='right'>MOK</StyledTableCell>
 
                 {isAuthenticated ? (
                   <>
                     <StyledTableCell align='right'>
-                      Przybliżony czas wysyłki
+                      DELIVERY TIME
                     </StyledTableCell>
 
                     <StyledTableCell
                       align='right'
-                      style={{ borderTopRightRadius: "20px" }}
+                      style={{ borderTopRightRadius: "5px" }}
                     ></StyledTableCell>
                   </>
                 ) : (
                   <StyledTableCell
                     align='right'
-                    style={{ borderTopRightRadius: "20px" }}
+                    style={{ borderTopRightRadius: "5px" }}
                   >
-                    Przybliżony czas wysyłki
+                    DELIVERY TIME
                   </StyledTableCell>
                 )}
               </TableRow>
@@ -305,7 +321,7 @@ const CustomizedTables = ({
                             disabled={disable}
                             disableElevation={true}
                             style={{
-                              borderRadius: "50%",
+                              borderRadius: "2px",
                               background: "inherit",
                             }}
                             onClick={(e) => {
@@ -322,7 +338,7 @@ const CustomizedTables = ({
                             disabled={disable}
                             disableElevation={true}
                             style={{
-                              borderRadius: "50%",
+                              borderRadius: "2px",
                               background: "inherit",
                             }}
                             onClick={(e) => {
@@ -390,7 +406,7 @@ const CustomizedTables = ({
                           : null
                       }
                     >
-                      {item.price + " zł"}
+                      {item.priceEUR + " €"}
                     </StyledTableCell>
                     <StyledTableCell
                       align='right'
@@ -453,72 +469,6 @@ const CustomizedTables = ({
                 ) : null
               )}
             </TableBody>
-            <TableFooter
-              style={{
-                backgroundColor: "#ECF0F6",
-              }}
-            >
-              <TableRow>
-                <StyledTableCell
-                  align='right'
-                  style={{
-                    borderBottomLeftRadius: "20px",
-                    borderBottom: "none",
-                  }}
-                ></StyledTableCell>
-                {/*<StyledTableCell
-                align='right'
-                style={{ borderBottom: "none" }}
-              ></StyledTableCell>*/}
-                <StyledTableCell
-                  align='right'
-                  style={{ borderBottom: "none" }}
-                ></StyledTableCell>
-                <StyledTableCell
-                  align='right'
-                  style={{ borderBottom: "none" }}
-                ></StyledTableCell>
-                <StyledTableCell
-                  align='right'
-                  style={{ borderBottom: "none" }}
-                ></StyledTableCell>
-                <StyledTableCell
-                  align='right'
-                  style={{ borderBottom: "none" }}
-                ></StyledTableCell>
-                {isAuthenticated ? (
-                  <>
-                    <StyledTableCell
-                      align='right'
-                      style={{ borderBottom: "none" }}
-                    ></StyledTableCell>
-                    <StyledTableCell
-                      align='right'
-                      style={{ borderBottom: "none" }}
-                    ></StyledTableCell>
-                    <StyledTableCell
-                      align='right'
-                      style={{ borderBottom: "none" }}
-                    ></StyledTableCell>
-                    <StyledTableCell
-                      align='right'
-                      style={{
-                        borderBottomRightRadius: "20px",
-                        borderBottom: "none",
-                      }}
-                    ></StyledTableCell>
-                  </>
-                ) : (
-                  <StyledTableCell
-                    align='right'
-                    style={{
-                      borderBottomRightRadius: "20px",
-                      borderBottom: "none",
-                    }}
-                  ></StyledTableCell>
-                )}
-              </TableRow>
-            </TableFooter>
           </Table>
         </TableContainer>
       ))}

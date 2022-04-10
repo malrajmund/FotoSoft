@@ -18,13 +18,13 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: "130px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "white",
     padding: "40px",
-    borderRadius: "20px",
+    borderRadius: "5px",
     marginBottom: "20px",
   },
   avatar: {

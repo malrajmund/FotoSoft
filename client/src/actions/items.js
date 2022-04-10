@@ -54,7 +54,17 @@ export const addItem = (formData) => async (dispatch) => {
     });
     dispatch(setAlert("Dodano pozycję.", "success"));
   } catch (error) {
-    console.log(error.msg);
+    dispatch({
+      type: ITEM_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+        err: error.response,
+        err2: error,
+        err3: error.res
+      },
+    });
+    dispatch(setAlert("Wystapił błąd podczas dodawania.", "danger"));
   }
 };
 

@@ -16,6 +16,7 @@ import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./store";
+import DownloadCSV from "./components/DownloadCSV";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -43,12 +44,13 @@ const App = () => {
               xl={12}
               style={{
                 minHeight: "100%", //"calc(100vh - 100px)",
-                backgroundColor: "#3B4557",
+                backgroundColor: "#EDEDED",
               }}
             >
               <section className='container'>
                 <Alert />
                 <Switch>
+                <Route exact path='/download_csv' component={DownloadCSV}></Route>
                   <Route exact path='/login' component={Login}></Route>
                   <Route exact path='/addItem' component={ItemForm}></Route>
                   <Route

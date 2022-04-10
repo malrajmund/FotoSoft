@@ -28,14 +28,16 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: "130px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "white",
     padding: "40px",
-    borderRadius: "20px",
+    borderRadius: "5px",
     marginBottom: "20px",
+    boxShadow:
+      "rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;",
   },
   avatar: {
     margin: theme.spacing(1),
